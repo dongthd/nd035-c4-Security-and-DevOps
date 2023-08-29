@@ -51,14 +51,17 @@ public class UserController {
 		log.info("Begin create user with username {}", createUserRequest.getUsername());
 		User userExists = userRepository.findByUsername(createUserRequest.getUsername());
 		if(userExists != null) {
+			log.info("Create user with username {} fail -> Username is exists", createUserRequest.getUsername());
 			throw new Exception("Username is exists");
 		}
 
 		if(createUserRequest.getPassword().length() < 6) {
+			log.info("Create user with username {} fail -> Password must more 6 character", createUserRequest.getUsername());
 			throw new Exception("Password must more 6 character");
 		}
 
 		if(!createUserRequest.getPassword().equals(createUserRequest.getConfirmPassword())) {
+			log.info("Create user with username {} fail -> Confirm password is not same", createUserRequest.getUsername());
 			throw new Exception("Confirm password is not same");
 		}
 
