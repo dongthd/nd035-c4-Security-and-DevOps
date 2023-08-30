@@ -35,45 +35,46 @@ public class UserController {
 
 	@GetMapping("/id/{id}")
 	public ResponseEntity<User> findById(@PathVariable Long id) {
-		log.info("Find by user Id: {}", id);
+		log.info("UserController.findById - Find by user Id: {}", id);
 		return ResponseEntity.of(userRepository.findById(id));
 	}
 
 	@GetMapping("/{username}")
 	public ResponseEntity<User> findByUserName(@PathVariable String username) {
-		log.info("Find by username: {}", username);
+		log.info("UserController.findByUserName - Find by username: {}", username);
 		User user = userRepository.findByUsername(username);
 		return user == null ? ResponseEntity.notFound().build() : ResponseEntity.ok(user);
 	}
 
 	@PostMapping("/create")
 	public ResponseEntity<User> createUser(@RequestBody CreateUserRequest createUserRequest) throws Exception {
-		log.info("Begin create user with username {}", createUserRequest.getUsername());
+		log.info("Start create user with username {}", createUserRequest.getUsername());
 		User userExists = userRepository.findByUsername(createUserRequest.getUsername());
 		if(userExists != null) {
-			log.info("Create user with username {} fail -> Username is exists", createUserRequest.getUsername());
+			log.info("UserController.createUser - Cannot create user {} because the Username is exists", createUserRequest.getUsername());
 			throw new Exception("Username is exists");
 		}
 
 		if(createUserRequest.getPassword().length() < 6) {
-			log.info("Create user with username {} fail -> Password must more 6 character", createUserRequest.getUsername());
+			log.info("UserController.createUser - Cannot create user {} because the password must more 6 character", createUserRequest.getUsername());
 			throw new Exception("Password must more 6 character");
 		}
 
 		if(!createUserRequest.getPassword().equals(createUserRequest.getConfirmPassword())) {
-			log.info("Create user with username {} fail -> Confirm password is not same", createUserRequest.getUsername());
+			log.info("UserController.createUser - Cannot create user {} because the password is invalid", createUserRequest.getUsername());
 			throw new Exception("Confirm password is not same");
 		}
 
 		User user = new User();
 		user.setUsername(createUserRequest.getUsername());
 		user.setPassword(bCryptPasswordEncoder.encode(createUserRequest.getPassword()));
+
 		Cart cart = new Cart();
 		cartRepository.save(cart);
 		user.setCart(cart);
+
 		userRepository.save(user);
-		log.info("User created successfully");
-		log.info("End create user with username {}", createUserRequest.getUsername());
+		log.info("UserController.createUser - username {} created successfully", createUserRequest.getUsername());
 		return ResponseEntity.ok(user);
 	}
 	

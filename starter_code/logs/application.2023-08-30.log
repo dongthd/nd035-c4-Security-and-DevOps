@@ -1,0 +1,65 @@
+18:24:19.812 [INFO] [c.e.demo.SareetaApplicationTests][Method logStarting] - Starting SareetaApplicationTests on Admin with PID 9260 (started by Admin in D:\Projects_Udacity\Projects_Devops\nd035-c4-Security-and-DevOps\starter_code)
+18:24:19.820 [INFO] [c.e.demo.SareetaApplicationTests][Method logStartupProfileInfo] - No active profile set, falling back to default profiles: default
+18:24:24.904 [INFO] [o.s.d.r.c.RepositoryConfigurationDelegate][Method registerRepositoriesIn] - Bootstrapping Spring Data repositories in DEFAULT mode.
+18:24:25.339 [INFO] [o.s.d.r.c.RepositoryConfigurationDelegate][Method registerRepositoriesIn] - Finished Spring Data repository scanning in 403ms. Found 4 repository interfaces.
+18:24:29.374 [INFO] [o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker][Method postProcessAfterInitialization] - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$6ab245ce] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+18:24:30.493 [INFO] [com.zaxxer.hikari.HikariDataSource][Method getConnection] - HikariPool-1 - Starting...
+18:24:31.740 [INFO] [com.zaxxer.hikari.HikariDataSource][Method getConnection] - HikariPool-1 - Start completed.
+18:24:32.424 [INFO] [o.h.jpa.internal.util.LogHelper][Method logPersistenceUnitInformation] - HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+18:24:32.829 [INFO] [org.hibernate.Version][Method logVersion] - HHH000412: Hibernate Core {5.3.10.Final}
+18:24:32.835 [INFO] [org.hibernate.cfg.Environment][Method <clinit>] - HHH000206: hibernate.properties not found
+18:24:34.708 [INFO] [o.h.annotations.common.Version][Method <clinit>] - HCANN000001: Hibernate Commons Annotations {5.0.4.Final}
+18:24:36.007 [INFO] [org.hibernate.dialect.Dialect][Method <init>] - HHH000400: Using dialect: org.hibernate.dialect.H2Dialect
+18:24:39.908 [INFO] [o.s.o.j.LocalContainerEntityManagerFactoryBean][Method buildNativeEntityManagerFactory] - Initialized JPA EntityManagerFactory for persistence unit 'default'
+18:24:44.408 [WARN] [o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration$JpaWebMvcConfiguration][Method openEntityManagerInViewInterceptor] - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+18:24:45.767 [INFO] [o.s.s.web.DefaultSecurityFilterChain][Method <init>] - Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7c8a91e2, org.springframework.security.web.context.SecurityContextPersistenceFilter@39dce2df, org.springframework.security.web.header.HeaderWriterFilter@38b0e2a7, org.springframework.web.filter.CorsFilter@c7443f, org.springframework.security.web.authentication.logout.LogoutFilter@79c2bc34, com.example.demo.security.JWTAuthenticationFilter@74e175c7, com.example.demo.security.JWTAuthenticationVerficationFilter@1c528f2f, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@92b1bda, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@5392aa2b, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@34ff08c6, org.springframework.security.web.session.SessionManagementFilter@73eae5f, org.springframework.security.web.access.ExceptionTranslationFilter@7a364e1c, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@6b756a62]
+18:24:47.415 [INFO] [o.s.s.c.ThreadPoolTaskExecutor][Method initialize] - Initializing ExecutorService 'applicationTaskExecutor'
+18:24:49.114 [INFO] [c.e.demo.SareetaApplicationTests][Method logStarted] - Started SareetaApplicationTests in 32.159 seconds (JVM running for 40.088)
+18:24:51.292 [INFO] [c.e.demo.controllers.CartController][Method addToCart] - CartController.addToCart - Add cart to username: user1
+18:24:51.301 [INFO] [c.e.demo.controllers.CartController][Method addToCart] - CartController.addToCart - Add item to cart successfully
+18:24:51.384 [INFO] [c.e.demo.controllers.CartController][Method removeFromCart] - CartController.removeFromCart - Start remove item in cart
+18:24:51.385 [ERROR] [c.e.demo.controllers.CartController][Method removeFromCart] - CartController.removeFromCart - Quantity remove more than quantity exists
+18:24:51.391 [INFO] [c.e.demo.controllers.CartController][Method removeFromCart] - CartController.removeFromCart - Start remove item in cart
+18:24:51.393 [ERROR] [c.e.demo.controllers.CartController][Method removeFromCart] - CartController.removeFromCart - Username user2 remove in cart not found
+18:24:51.395 [INFO] [c.e.demo.controllers.CartController][Method removeFromCart] - CartController.removeFromCart - Start remove item in cart
+18:24:51.396 [ERROR] [c.e.demo.controllers.CartController][Method removeFromCart] - CartController.removeFromCart - Item Id 2 remove in cart not found
+18:24:51.398 [INFO] [c.e.demo.controllers.CartController][Method addToCart] - CartController.addToCart - Add cart to username: user2
+18:24:51.399 [ERROR] [c.e.demo.controllers.CartController][Method addToCart] - CartController.addToCart - Username user2 add to cart not found
+18:24:51.405 [INFO] [c.e.demo.controllers.CartController][Method addToCart] - CartController.addToCart - Add cart to username: user1
+18:24:51.406 [ERROR] [c.e.demo.controllers.CartController][Method addToCart] - CartController.addToCart - Item Id 2 add to cart not found
+18:24:51.413 [INFO] [c.e.demo.controllers.CartController][Method addToCart] - CartController.addToCart - Add cart to username: user1
+18:24:51.433 [INFO] [c.e.demo.controllers.CartController][Method addToCart] - CartController.addToCart - Add item to cart successfully
+18:24:51.433 [INFO] [c.e.demo.controllers.CartController][Method removeFromCart] - CartController.removeFromCart - Start remove item in cart
+18:24:51.436 [INFO] [c.e.demo.controllers.CartController][Method removeFromCart] - CartController.removeFromCart - End remove item in cart
+18:24:51.439 [INFO] [c.e.demo.controllers.CartController][Method addToCart] - CartController.addToCart - Add cart to username: user1
+18:24:51.440 [INFO] [c.e.demo.controllers.CartController][Method addToCart] - CartController.addToCart - Add item to cart successfully
+18:24:51.443 [ERROR] [c.e.demo.controllers.UserController][Method handlerException] - HandlerExceptionController Example test exception
+18:24:51.444 [ERROR] [c.e.demo.controllers.UserController][Method handlerException] - HandlerExceptionController Stack Trace [com.example.demo.controllers.HandlerExceptionControllerTest.testHandlerException(HandlerExceptionControllerTest.java:19), java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method), java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77), java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43), java.base/java.lang.reflect.Method.invoke(Method.java:568), org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59), org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12), org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56), org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17), org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26), org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306), org.junit.runners.BlockJUnit4ClassRunner$1.evaluate(BlockJUnit4ClassRunner.java:100), org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366), org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:103), org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:63), org.junit.runners.ParentRunner$4.run(ParentRunner.java:331), org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79), org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329), org.junit.runners.ParentRunner.access$100(ParentRunner.java:66), org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293), org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306), org.junit.runners.ParentRunner.run(ParentRunner.java:413), org.junit.runners.Suite.runChild(Suite.java:128), org.junit.runners.Suite.runChild(Suite.java:27), org.junit.runners.ParentRunner$4.run(ParentRunner.java:331), org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79), org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329), org.junit.runners.ParentRunner.access$100(ParentRunner.java:66), org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293), org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306), org.junit.runners.ParentRunner.run(ParentRunner.java:413), org.junit.runner.JUnitCore.run(JUnitCore.java:137), com.intellij.junit4.JUnit4IdeaTestRunner.startRunnerWithArgs(JUnit4IdeaTestRunner.java:69), com.intellij.rt.junit.IdeaTestRunner$Repeater$1.execute(IdeaTestRunner.java:38), com.intellij.rt.execution.junit.TestsRepeater.repeat(TestsRepeater.java:11), com.intellij.rt.junit.IdeaTestRunner$Repeater.startRunnerWithArgs(IdeaTestRunner.java:35), com.intellij.rt.junit.JUnitStarter.prepareStreamsAndStart(JUnitStarter.java:232), com.intellij.rt.junit.JUnitStarter.main(JUnitStarter.java:55)]
+18:24:51.460 [INFO] [c.e.demo.controllers.ItemController][Method getItemById] - ItemController.getItems - Find by item Id: 1
+18:24:51.470 [INFO] [c.e.demo.controllers.ItemController][Method getItemById] - ItemController.getItems - Find by item Id: 0
+18:24:51.473 [INFO] [c.e.demo.controllers.ItemController][Method getItems] - ItemController.getItems - Get all item
+18:24:51.480 [INFO] [c.e.demo.controllers.ItemController][Method getItemsByName] - ItemController.getItems - Find by item name: Some item other
+18:24:51.483 [INFO] [c.e.demo.controllers.ItemController][Method getItemsByName] - ItemController.getItems - Find by item name: Item 1
+18:24:51.671 [INFO] [c.e.demo.controllers.OrderController][Method submit] - OrderController.submit - Start order with username user2
+18:24:51.673 [ERROR] [c.e.demo.controllers.OrderController][Method submit] - OrderController.submit - Username user2 order not found
+18:24:51.693 [INFO] [c.e.demo.controllers.OrderController][Method submit] - OrderController.submit - Start order with username user1
+18:24:51.694 [INFO] [c.e.demo.controllers.OrderController][Method submit] - OrderController.submit - Username user1 order successfully
+18:24:51.697 [ERROR] [c.e.demo.controllers.OrderController][Method getOrdersForUser] - OrderController.submit - Username user2 order not found
+18:24:51.807 [INFO] [c.e.demo.controllers.UserController][Method findByUserName] - UserController.findByUserName - Find by username: user1
+18:24:51.809 [INFO] [c.e.demo.controllers.UserController][Method findById] - UserController.findById - Find by user Id: 1
+18:24:51.815 [INFO] [c.e.demo.controllers.UserController][Method createUser] - Start create user with username user1
+18:24:51.817 [INFO] [c.e.demo.controllers.UserController][Method createUser] - UserController.createUser - username user1 created successfully
+18:24:51.822 [INFO] [c.e.demo.controllers.UserController][Method createUser] - Start create user with username user1
+18:24:51.823 [INFO] [c.e.demo.controllers.UserController][Method createUser] - UserController.createUser - Cannot create user user1 because the password must more 6 character
+18:24:51.827 [INFO] [c.e.demo.controllers.UserController][Method findById] - UserController.findById - Find by user Id: 0
+18:24:51.829 [INFO] [c.e.demo.controllers.UserController][Method createUser] - Start create user with username user1
+18:24:51.830 [INFO] [c.e.demo.controllers.UserController][Method createUser] - UserController.createUser - Cannot create user user1 because the password is invalid
+18:24:51.832 [INFO] [c.e.demo.controllers.UserController][Method createUser] - Start create user with username user1
+18:24:51.833 [INFO] [c.e.demo.controllers.UserController][Method createUser] - UserController.createUser - Cannot create user user1 because the Username is exists
+18:24:51.836 [INFO] [c.e.demo.controllers.UserController][Method findByUserName] - UserController.findByUserName - Find by username: user2
+18:24:51.903 [INFO] [o.s.s.c.ThreadPoolTaskExecutor][Method shutdown] - Shutting down ExecutorService 'applicationTaskExecutor'
+18:24:51.920 [INFO] [o.s.o.j.LocalContainerEntityManagerFactoryBean][Method destroy] - Closing JPA EntityManagerFactory for persistence unit 'default'
+18:24:51.924 [INFO] [com.zaxxer.hikari.HikariDataSource][Method close] - HikariPool-1 - Shutdown initiated...
+18:24:51.986 [INFO] [com.zaxxer.hikari.HikariDataSource][Method close] - HikariPool-1 - Shutdown completed.

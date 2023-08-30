@@ -20,7 +20,10 @@ import static org.mockito.Mockito.when;
 public class ItemControllerTest {
 
     private ItemController itemController;
+
     private ItemRepository itemRepo = mock(ItemRepository.class);
+
+    public static final String ITEM_1 = "Item 1";
 
     @Before
     public void init() {
@@ -81,7 +84,7 @@ public class ItemControllerTest {
     private Item getItem() {
         Item item = new Item();
         item.setId(1L);
-        item.setName("Item 1");
+        item.setName(ITEM_1);
         BigDecimal price = BigDecimal.valueOf(15.5);
         item.setPrice(price);
         item.setDescription("Description item 1");

@@ -38,48 +38,47 @@ public class CartController {
 
 	@PostMapping("/addToCart")
 	public ResponseEntity<Cart> addToCart(@RequestBody ModifyCartRequest request) {
-		log.info("Begin add item to cart");
-		log.info("Add cart to username: {}", request.getUsername());
+		log.info("CartController.addToCart - Add cart to username: {}", request.getUsername());
 		User user = userRepository.findByUsername(request.getUsername());
 		if(user == null) {
-			log.error("Username {} add to cart not found", request.getUsername());
+			log.error("CartController.addToCart - Username {} add to cart not found", request.getUsername());
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 		}
 		Optional<Item> item = itemRepository.findById(request.getItemId());
 		if(!item.isPresent()) {
-			log.error("Item Id {} add to cart not found", request.getItemId());
+			log.error("CartController.addToCart - Item Id {} add to cart not found", request.getItemId());
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 		}
 		Cart cart = user.getCart();
 		IntStream.range(0, request.getQuantity())
 				.forEach(i -> cart.addItem(item.get()));
 		cartRepository.save(cart);
-		log.info("End add item to cart");
+		log.info("CartController.addToCart - Add item to cart successfully");
 		return ResponseEntity.ok(cart);
 	}
 
 	@PostMapping("/removeFromCart")
 	public ResponseEntity<Cart> removeFromCart(@RequestBody ModifyCartRequest request) throws Exception {
-		log.info("Remove item in cart");
+		log.info("CartController.removeFromCart - Start remove item in cart");
 		User user = userRepository.findByUsername(request.getUsername());
 		if(user == null) {
-			log.error("Username {} remove in cart not found", request.getUsername());
+			log.error("CartController.removeFromCart - Username {} remove in cart not found", request.getUsername());
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 		}
 		Optional<Item> item = itemRepository.findById(request.getItemId());
 		if(!item.isPresent()) {
-			log.error("Item Id {} remove in cart not found", request.getItemId());
+			log.error("CartController.removeFromCart - Item Id {} remove in cart not found", request.getItemId());
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 		}
 		Cart cart = user.getCart();
 		if(request.getQuantity() > cart.getItems().size()) {
-			log.error("Quantity remove more than quantity exists");
+			log.error("CartController.removeFromCart - Quantity remove more than quantity exists");
 			throw new Exception("Quantity remove more than quantity exists");
 		}
 		IntStream.range(0, request.getQuantity())
 				.forEach(i -> cart.removeItem(item.get()));
 		cartRepository.save(cart);
-		log.info("Remove item in cart");
+		log.info("CartController.removeFromCart - End remove item in cart");
 		return ResponseEntity.ok(cart);
 	}
 		

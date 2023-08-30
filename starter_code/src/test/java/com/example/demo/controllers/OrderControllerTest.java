@@ -26,6 +26,11 @@ public class OrderControllerTest {
     private UserRepository userRepository = mock(UserRepository.class);
     private OrderRepository orderRepository = mock(OrderRepository.class);
 
+    public static final String USER_1 = "user1";
+    public static final String USER_2 = "user2";
+    public static final String PASSWORD = "Hashed";
+    public static final String ITEM_1 = "Item 1";
+
     @Before
     public void init() {
         orderController = new OrderController();
@@ -36,9 +41,9 @@ public class OrderControllerTest {
     @Test
     public void testSubmitOrder() {
         User userFake = getUser();
-        when(userRepository.findByUsername("user1")).thenReturn(userFake);
+        when(userRepository.findByUsername(USER_1)).thenReturn(userFake);
 
-        ResponseEntity<UserOrder> response = orderController.submit("user1");
+        ResponseEntity<UserOrder> response = orderController.submit(USER_1);
         assertNotNull(response);
         assertEquals(200, response.getStatusCodeValue());
         UserOrder order = response.getBody();
@@ -48,8 +53,8 @@ public class OrderControllerTest {
 
     @Test
     public void testSubmitOrderWithUserNotExists() {
-        when(userRepository.findByUsername("user2")).thenReturn(null);
-        ResponseEntity<UserOrder> response = orderController.submit("user2");
+        when(userRepository.findByUsername(USER_2)).thenReturn(null);
+        ResponseEntity<UserOrder> response = orderController.submit(USER_2);
         assertNotNull(response);
         assertEquals(404, response.getStatusCodeValue());
     }
@@ -57,9 +62,9 @@ public class OrderControllerTest {
     @Test
     public void testGetOrdersForUser() {
         User userFake = getUser();
-        when(userRepository.findByUsername("user1")).thenReturn(userFake);
+        when(userRepository.findByUsername(USER_1)).thenReturn(userFake);
 
-        ResponseEntity<List<UserOrder>> response = orderController.getOrdersForUser("user1");
+        ResponseEntity<List<UserOrder>> response = orderController.getOrdersForUser(USER_1);
         assertNotNull(response);
         assertEquals(200, response.getStatusCodeValue());
         List<UserOrder> orders = response.getBody();
@@ -68,8 +73,8 @@ public class OrderControllerTest {
 
     @Test
     public void testGetOrdersForUserWithUserNotExists() {
-        when(userRepository.findByUsername("user2")).thenReturn(null);
-        ResponseEntity<List<UserOrder>> response = orderController.getOrdersForUser("user2");
+        when(userRepository.findByUsername(USER_2)).thenReturn(null);
+        ResponseEntity<List<UserOrder>> response = orderController.getOrdersForUser(USER_2);
         assertNotNull(response);
         assertEquals(404, response.getStatusCodeValue());
     }
@@ -80,8 +85,8 @@ public class OrderControllerTest {
         User user = new User();
         Cart cart = new Cart();
         user.setId(0);
-        user.setUsername("user1");
-        user.setPassword("Hashed");
+        user.setUsername(USER_1);
+        user.setPassword(PASSWORD);
         cart.setId(0L);
         cart.setUser(user);
         cart.setItems(Collections.singletonList(item));
@@ -94,7 +99,7 @@ public class OrderControllerTest {
     private Item getItem() {
         Item item = new Item();
         item.setId(1L);
-        item.setName("Item 1");
+        item.setName(ITEM_1);
         BigDecimal price = BigDecimal.valueOf(15.5);
         item.setPrice(price);
         item.setDescription("Description item 1");

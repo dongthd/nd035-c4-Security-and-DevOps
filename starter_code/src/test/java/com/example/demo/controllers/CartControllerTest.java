@@ -31,6 +31,11 @@ public class CartControllerTest {
 
     private ItemRepository itemRepository = mock(ItemRepository.class);
 
+    public static final String USER_1 = "user1";
+    public static final String USER_2 = "user2";
+    public static final String PASSWORD = "Hashed";
+    public static final String ITEM_1 = "Item 1";
+
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
@@ -45,7 +50,7 @@ public class CartControllerTest {
     @Test
     public void testAddToCart() {
         User userFake = getUser();
-        when(userRepository.findByUsername("user1")).thenReturn(userFake);
+        when(userRepository.findByUsername(USER_1)).thenReturn(userFake);
 
         Item itemFake = getItem();
         when(itemRepository.findById(1L)).thenReturn(Optional.of((itemFake)));
@@ -53,7 +58,7 @@ public class CartControllerTest {
         ModifyCartRequest modifyCartRequest = new ModifyCartRequest();
         modifyCartRequest.setItemId(1L);
         modifyCartRequest.setQuantity(10);
-        modifyCartRequest.setUsername("user1");
+        modifyCartRequest.setUsername(USER_1);
         ResponseEntity<Cart> response = cartController.addToCart(modifyCartRequest);
 
         assertNotNull(response);
@@ -65,11 +70,11 @@ public class CartControllerTest {
 
     @Test
     public void testAddToCartWithUserNotExists() {
-        when(userRepository.findByUsername("user2")).thenReturn(null);
+        when(userRepository.findByUsername(USER_2)).thenReturn(null);
         ModifyCartRequest modifyCartRequest = new ModifyCartRequest();
         modifyCartRequest.setItemId(1L);
         modifyCartRequest.setQuantity(10);
-        modifyCartRequest.setUsername("user2");
+        modifyCartRequest.setUsername(USER_2);
 
         ResponseEntity<Cart> response = cartController.addToCart(modifyCartRequest);
         assertEquals(404, response.getStatusCodeValue());
@@ -80,12 +85,12 @@ public class CartControllerTest {
     @Test
     public void testAddToCartWithItemNotExists() {
         User userFake = getUser();
-        when(userRepository.findByUsername("user1")).thenReturn(userFake);
+        when(userRepository.findByUsername(USER_1)).thenReturn(userFake);
         when(itemRepository.findById(2L)).thenReturn(Optional.empty());
         ModifyCartRequest modifyCartRequest = new ModifyCartRequest();
         modifyCartRequest.setItemId(2L);
         modifyCartRequest.setQuantity(10);
-        modifyCartRequest.setUsername("user1");
+        modifyCartRequest.setUsername(USER_1);
 
         ResponseEntity<Cart> response = cartController.addToCart(modifyCartRequest);
         assertEquals(404, response.getStatusCodeValue());
@@ -96,7 +101,7 @@ public class CartControllerTest {
     @Test
     public void testRemoveFromCart() throws Exception {
         User userFake = getUser();
-        when(userRepository.findByUsername("user1")).thenReturn(userFake);
+        when(userRepository.findByUsername(USER_1)).thenReturn(userFake);
 
         Item itemFake = getItem();
         when(itemRepository.findById(1L)).thenReturn(Optional.of((itemFake)));
@@ -104,7 +109,7 @@ public class CartControllerTest {
         ModifyCartRequest modifyCartRequest = new ModifyCartRequest();
         modifyCartRequest.setItemId(1L);
         modifyCartRequest.setQuantity(2);
-        modifyCartRequest.setUsername("user1");
+        modifyCartRequest.setUsername(USER_1);
         ResponseEntity<Cart> response = cartController.addToCart(modifyCartRequest);
         assertNotNull(response);
         assertEquals(200, response.getStatusCodeValue());
@@ -112,7 +117,7 @@ public class CartControllerTest {
         ModifyCartRequest modifyCartRequest2 = new ModifyCartRequest();
         modifyCartRequest2.setItemId(1L);
         modifyCartRequest2.setQuantity(1);
-        modifyCartRequest2.setUsername("user1");
+        modifyCartRequest2.setUsername(USER_1);
         ResponseEntity<Cart> response2 = cartController.removeFromCart(modifyCartRequest2);
 
         assertNotNull(response2);
@@ -124,11 +129,11 @@ public class CartControllerTest {
 
     @Test
     public void testRemoveFromCartWithUserNotExists() throws Exception {
-        when(userRepository.findByUsername("user2")).thenReturn(null);
+        when(userRepository.findByUsername(USER_2)).thenReturn(null);
         ModifyCartRequest modifyCartRequest = new ModifyCartRequest();
         modifyCartRequest.setItemId(1L);
         modifyCartRequest.setQuantity(10);
-        modifyCartRequest.setUsername("user2");
+        modifyCartRequest.setUsername(USER_2);
 
         ResponseEntity<Cart> response = cartController.removeFromCart(modifyCartRequest);
         assertEquals(404, response.getStatusCodeValue());
@@ -139,12 +144,12 @@ public class CartControllerTest {
     @Test
     public void testRemoveFromCartWithItemNotExists() throws Exception {
         User userFake = getUser();
-        when(userRepository.findByUsername("user1")).thenReturn(userFake);
+        when(userRepository.findByUsername(USER_1)).thenReturn(userFake);
         when(itemRepository.findById(2L)).thenReturn(Optional.empty());
         ModifyCartRequest modifyCartRequest = new ModifyCartRequest();
         modifyCartRequest.setItemId(2L);
         modifyCartRequest.setQuantity(10);
-        modifyCartRequest.setUsername("user1");
+        modifyCartRequest.setUsername(USER_1);
 
         ResponseEntity<Cart> response = cartController.removeFromCart(modifyCartRequest);
         assertEquals(404, response.getStatusCodeValue());
@@ -155,7 +160,7 @@ public class CartControllerTest {
     @Test
     public void testRemoveFromCartWithQuantityMoreExists() throws Exception {
         User userFake = getUser();
-        when(userRepository.findByUsername("user1")).thenReturn(userFake);
+        when(userRepository.findByUsername(USER_1)).thenReturn(userFake);
 
         Item itemFake = getItem();
         when(itemRepository.findById(1L)).thenReturn(Optional.of((itemFake)));
@@ -163,7 +168,7 @@ public class CartControllerTest {
         ModifyCartRequest modifyCartRequest = new ModifyCartRequest();
         modifyCartRequest.setItemId(1L);
         modifyCartRequest.setQuantity(2);
-        modifyCartRequest.setUsername("user1");
+        modifyCartRequest.setUsername(USER_1);
         ResponseEntity<Cart> response = cartController.addToCart(modifyCartRequest);
         assertNotNull(response);
         assertEquals(200, response.getStatusCodeValue());
@@ -171,7 +176,7 @@ public class CartControllerTest {
         ModifyCartRequest modifyCartRequest2 = new ModifyCartRequest();
         modifyCartRequest2.setItemId(1L);
         modifyCartRequest2.setQuantity(10);
-        modifyCartRequest2.setUsername("user1");
+        modifyCartRequest2.setUsername(USER_1);
 
         thrown.expect(Exception.class);
         thrown.expectMessage("Quantity remove more than quantity exists");
@@ -183,8 +188,8 @@ public class CartControllerTest {
         User user = new User();
         Cart cart = new Cart();
         user.setId(0);
-        user.setUsername("user1");
-        user.setPassword("Hashed");
+        user.setUsername(USER_1);
+        user.setPassword(PASSWORD);
         user.setCart(cart);
         return user;
     }
@@ -192,7 +197,7 @@ public class CartControllerTest {
     private Item getItem() {
         Item item = new Item();
         item.setId(1L);
-        item.setName("Item 1");
+        item.setName(ITEM_1);
         BigDecimal price = BigDecimal.valueOf(15.5);
         item.setPrice(price);
         item.setDescription("Description item 1");

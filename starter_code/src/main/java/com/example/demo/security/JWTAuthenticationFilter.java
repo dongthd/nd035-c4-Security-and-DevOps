@@ -39,14 +39,14 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
             com.example.demo.model.persistence.User credentials = new ObjectMapper()
                     .readValue(req.getInputStream(), com.example.demo.model.persistence.User.class);
 
-            log.info("Attempting authentication for user " + credentials.getUsername());
+            log.info("JWTAuthenticationFilter.attemptAuthentication - authentication for user " + credentials.getUsername());
             return authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
                             credentials.getUsername(),
                             credentials.getPassword(),
                             new ArrayList<>()));
         } catch (IOException e) {
-            log.error("Authentication attempt exception: " + e.getMessage());
+            log.error("JWTAuthenticationFilter.attemptAuthentication - Authentication attempt exception: " + e.getMessage());
             throw new RuntimeException(e);
         }
     }
@@ -61,12 +61,12 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                 .withExpiresAt(new Date(System.currentTimeMillis() + SecurityConstants.EXPIRATION_TIME))
                 .sign(HMAC512(SecurityConstants.SECRET.getBytes()));
         res.addHeader(SecurityConstants.HEADER_STRING, SecurityConstants.TOKEN_PREFIX + token);
-        log.info("User {} login success!", ((org.springframework.security.core.userdetails.User) auth.getPrincipal()).getUsername());
+        log.info("JWTAuthenticationFilter.successfulAuthentication - User {} login success!", ((org.springframework.security.core.userdetails.User) auth.getPrincipal()).getUsername());
     }
 
     @Override
     protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException, ServletException {
-        log.error("Authentication attempt failed. {}.", failed.getMessage());
+        log.error("JWTAuthenticationFilter.unsuccessfulAuthentication - Authentication attempt failed. {}.", failed.getMessage());
         super.unsuccessfulAuthentication(request, response, failed);
     }
 }

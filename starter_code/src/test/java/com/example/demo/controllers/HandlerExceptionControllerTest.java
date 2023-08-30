@@ -16,7 +16,7 @@ public class HandlerExceptionControllerTest {
 
     @Test
     public void testHandlerException() {
-        Exception ex = new Exception("Test exception");
+        Exception ex = new Exception("Example test exception");
         final ResponseEntity<String> response = handlerExceptionController.handlerException(ex);
     }
 }

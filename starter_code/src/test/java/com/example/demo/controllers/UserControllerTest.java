@@ -26,6 +26,13 @@ public class UserControllerTest {
     private CartRepository cartRepo = mock(CartRepository.class);
     private BCryptPasswordEncoder bCryptPasswordEncoder = mock(BCryptPasswordEncoder.class);
 
+    public static final String USER_1 = "user1";
+    public static final String USER_2 = "user2";
+    public static final String PASSWORD = "Hashed";
+    public static final String PASSWORD_1 = "password1";
+    public static final String PASSWORD_2 = "password2";
+    public static final String PASSWORD_MIN_LENGTH = "pas";
+
     @Rule
     public ExpectedException thrown = ExpectedException.none();
     @Before
@@ -38,26 +45,26 @@ public class UserControllerTest {
 
     @Test
     public void testCreateUserSuccess() throws Exception {
-        when(bCryptPasswordEncoder.encode("password1")).thenReturn("Hashed");
+        when(bCryptPasswordEncoder.encode(PASSWORD_1)).thenReturn(PASSWORD);
         CreateUserRequest createUserRequest = new CreateUserRequest();
-        createUserRequest.setUsername("user1");
-        createUserRequest.setPassword("password1");
-        createUserRequest.setConfirmPassword("password1");
+        createUserRequest.setUsername(USER_1);
+        createUserRequest.setPassword(PASSWORD_1);
+        createUserRequest.setConfirmPassword(PASSWORD_1);
         final ResponseEntity<User> response = userController.createUser(createUserRequest);
         assertNotNull(response);
         assertEquals(200, response.getStatusCodeValue());
         User user = response.getBody();
         assertNotNull(user);
         assertEquals(0, user.getId());
-        assertEquals("user1", user.getUsername());
-        assertEquals("Hashed", user.getPassword());
+        assertEquals(USER_1, user.getUsername());
+        assertEquals(PASSWORD, user.getPassword());
     }
 
     @Test
     public void testFindUserByUserName() throws Exception {
         User userFake = getUser();
-        when(userRepo.findByUsername("user1")).thenReturn(userFake);
-        final ResponseEntity<User> response = userController.findByUserName("user1");
+        when(userRepo.findByUsername(USER_1)).thenReturn(userFake);
+        final ResponseEntity<User> response = userController.findByUserName(USER_1);
         User user = response.getBody();
         assertNotNull(user);
         assertEquals(userFake.getUsername(), user.getUsername());
@@ -65,8 +72,8 @@ public class UserControllerTest {
 
     @Test
     public void testFindUserByUserNameNotExists() throws Exception {
-        when(userRepo.findByUsername("user2")).thenReturn(null);
-        final ResponseEntity<User> response = userController.findByUserName("user2");
+        when(userRepo.findByUsername(USER_2)).thenReturn(null);
+        final ResponseEntity<User> response = userController.findByUserName(USER_2);
         User user = response.getBody();
         assertNull(user);
     }
@@ -74,11 +81,11 @@ public class UserControllerTest {
     @Test
     public void testCreateUserNameExists() throws Exception {
         User userFake = getUser();
-        when(userRepo.findByUsername("user1")).thenReturn(userFake);
+        when(userRepo.findByUsername(USER_1)).thenReturn(userFake);
 
         CreateUserRequest createUserRequest = new CreateUserRequest();
-        createUserRequest.setUsername("user1");
-        createUserRequest.setPassword("password1");
+        createUserRequest.setUsername(USER_1);
+        createUserRequest.setPassword(PASSWORD_1);
 
         thrown.expect(Exception.class);
         thrown.expectMessage("Username is exists");
@@ -88,9 +95,9 @@ public class UserControllerTest {
     @Test
     public void testCreateUserPasswordNotSame() throws Exception {
         CreateUserRequest createUserRequest = new CreateUserRequest();
-        createUserRequest.setUsername("user1");
-        createUserRequest.setPassword("password1");
-        createUserRequest.setConfirmPassword("password2");
+        createUserRequest.setUsername(USER_1);
+        createUserRequest.setPassword(PASSWORD_1);
+        createUserRequest.setConfirmPassword(PASSWORD_2);
 
         thrown.expect(Exception.class);
         thrown.expectMessage("Confirm password is not same");
@@ -100,9 +107,9 @@ public class UserControllerTest {
     @Test
     public void testCreateUserPasswordLengthNotMin() throws Exception {
         CreateUserRequest createUserRequest = new CreateUserRequest();
-        createUserRequest.setUsername("user1");
-        createUserRequest.setPassword("pas");
-        createUserRequest.setConfirmPassword("pas");
+        createUserRequest.setUsername(USER_1);
+        createUserRequest.setPassword(PASSWORD_MIN_LENGTH);
+        createUserRequest.setConfirmPassword(PASSWORD_MIN_LENGTH);
 
         thrown.expect(Exception.class);
         thrown.expectMessage("Password must more 6 character");
@@ -130,8 +137,8 @@ public class UserControllerTest {
         User user = new User();
         Cart cart = new Cart();
         user.setId(0);
-        user.setUsername("user1");
-        user.setPassword("Hashed");
+        user.setUsername(USER_1);
+        user.setPassword(PASSWORD);
         user.setCart(cart);
         return user;
     }

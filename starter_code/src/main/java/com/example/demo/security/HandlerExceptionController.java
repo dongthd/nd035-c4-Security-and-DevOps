@@ -18,7 +18,7 @@ public class HandlerExceptionController {
     @ExceptionHandler(Exception.class)
     public ResponseEntity<String> handlerException(Exception ex) {
         log.error("HandlerExceptionController " + ex.getMessage());
-        log.error("HandlerExceptionController trace " + Arrays.toString(ex.getStackTrace()));
+        log.error("HandlerExceptionController Stack Trace " + Arrays.toString(ex.getStackTrace()));
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
